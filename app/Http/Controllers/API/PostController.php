@@ -18,7 +18,8 @@ class PostController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(Request $request) {
-    return [$request->all(), $request->all('params')];
+    $params = $request->all('params'); 
+    return $params['params']['content'];
 
     // $request->validate([
     //   'content' => ['required', 'min:2'],
