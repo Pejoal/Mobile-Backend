@@ -11,14 +11,19 @@ class PostController extends Controller {
    * Display a listing of the resource.
    */
   public function index() {
-    return ['index'];
+    return Post::get();
   }
-  
+
   /**
    * Store a newly created resource in storage.
    */
   public function store(Request $request) {
-    return ['store'];
+    return Post::create($request->validate([
+      'content' => ['required', 'min:2'],
+      'user_id' => ['required', 'numeric'],
+    ]));
+    
+    // return ['store'];
 
   }
 
@@ -26,15 +31,23 @@ class PostController extends Controller {
    * Display the specified resource.
    */
   public function show(Post $post) {
-    return ['show'];
+    return $post;
   }
-
 
   /**
    * Update the specified resource in storage.
    */
   public function update(Request $request, Post $post) {
-    return ['update'];
+    $done = $post->update($request->validate([
+      'content' => ['required', 'min:2'],
+      'user_id' => ['required', 'numeric'],
+    ]));
+
+    if ($done) {
+      return response('Post Successfully Updated', 403);
+    }
+
+    return response('Some Error', 403);
 
   }
 
@@ -42,7 +55,12 @@ class PostController extends Controller {
    * Remove the specified resource from storage.
    */
   public function destroy(Post $post) {
-    return ['destroy'];
+    $done = $post->delete();
 
+    if ($done) {
+      return response('Post Successfully Deleted', 403);
+    }
+
+    return response('Some Error', 403);
   }
 }
