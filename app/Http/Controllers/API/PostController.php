@@ -19,7 +19,7 @@ class PostController extends Controller {
    */
   public function store(Request $request) {
     $params = $request->all('params')['params'];
-    return $params;
+    // return $params;
     // $request->validate([
     //   'content' => ['required', 'min:2'],
     //   'user_id' => ['required', 'numeric'],
