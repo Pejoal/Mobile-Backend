@@ -19,7 +19,7 @@ class PostController extends Controller {
    */
   public function store(Request $request) {
     
-    return $request->all()['content'];
+    // return $request->all()['content'];
 
     $request->validate([
       'content' => ['required', 'min:2'],
@@ -27,8 +27,8 @@ class PostController extends Controller {
     ]);
 
     return Post::create([
-      'content' => $request->input('content'),
-      'user_id' => $request->input('user_id'),
+      'content' => $request->all()['content'],
+      'user_id' => $request->all()['user_id'],
     ]);
 
 
