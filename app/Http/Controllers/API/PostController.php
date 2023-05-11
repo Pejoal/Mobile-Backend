@@ -18,6 +18,7 @@ class PostController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(Request $request) {
+    dd($request->all(), $request->all('content'), $request->content, $request->input('content'));
     $request->validate([
       'content' => ['required', 'min:2'],
       'user_id' => ['required', 'numeric'],
@@ -27,7 +28,7 @@ class PostController extends Controller {
       'content' => $request->input('content'),
       'user_id' => $request->input('user_id'),
     ]);
-    
+
     // return ['store'];
 
   }
