@@ -21,10 +21,10 @@ class PostController extends Controller {
     
     // return $request->all()['content'];
 
-    $request->validate([
-      'content' => ['required', 'min:2'],
-      'user_id' => ['required', 'numeric'],
-    ]);
+    // $request->validate([
+    //   'content' => ['required', 'min:2'],
+    //   'user_id' => ['required', 'numeric'],
+    // ]);
 
     return Post::create([
       'content' => $request->all()['content'],
