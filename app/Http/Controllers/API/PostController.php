@@ -51,7 +51,7 @@ class PostController extends Controller {
     ]));
 
     if ($done) {
-      return response('Post Successfully Updated', 201);
+      return response(['msg' => 'Post Successfully Updated'], 200);
     }
 
     return response('Some Error', 403);
@@ -65,7 +65,7 @@ class PostController extends Controller {
     $done = $post->delete();
 
     if ($done) {
-      return response('Post Successfully Deleted', 403);
+      return response(['msg' => 'Post Successfully Deleted'], 200);
     }
 
     return response('Some Error', 403);
