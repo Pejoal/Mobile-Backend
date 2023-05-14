@@ -19,16 +19,15 @@ class PostController extends Controller {
    */
   public function store(Request $request) {
     
-    // return $request->all()['content'];
 
-    // $request->validate([
-    //   'content' => ['required', 'min:2'],
-    //   'user_id' => ['required', 'numeric'],
-    // ]);
+    $request->validate([
+      'content' => ['required', 'min:2'],
+      'user_id' => ['required', 'numeric'],
+    ]);
 
     return Post::create([
-      'content' => $request->all()['content'],
-      'user_id' => $request->all()['user_id'],
+      'content' => $request->content,
+      'user_id' => $request->user_id,
     ]);
 
 
@@ -45,6 +44,7 @@ class PostController extends Controller {
    * Update the specified resource in storage.
    */
   public function update(Request $request, Post $post) {
+    
     $done = $post->update($request->validate([
       'content' => ['required', 'min:2'],
       'user_id' => ['required', 'numeric'],
