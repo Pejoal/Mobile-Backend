@@ -22,12 +22,11 @@ class PostController extends Controller {
 
     $request->validate([
       'content' => ['required', 'min:2'],
-      'user_id' => ['required', 'numeric'],
     ]);
 
     return Post::create([
       'content' => $request->content,
-      'user_id' => $request->user_id,
+      'user_id' => auth()->user()->id,
     ]);
 
 
@@ -47,7 +46,6 @@ class PostController extends Controller {
     
     $done = $post->update($request->validate([
       'content' => ['required', 'min:2'],
-      'user_id' => ['required', 'numeric'],
     ]));
 
     if ($done) {
