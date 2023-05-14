@@ -51,7 +51,7 @@ class PostController extends Controller {
     ]));
 
     if ($done) {
-      return response('Post Successfully Updated', 403);
+      return response('Post Successfully Updated', 201);
     }
 
     return response('Some Error', 403);

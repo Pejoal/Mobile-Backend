@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     public function register(Request $request) {
+      
       $validated = $request->validate([
         'name' => ['required'],
         'email' => ['required'],
