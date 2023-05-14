@@ -18,7 +18,6 @@ class PostController extends Controller {
    * Store a newly created resource in storage.
    */
   public function store(Request $request) {
-    
 
     $request->validate([
       'content' => ['required', 'min:2'],
@@ -28,7 +27,6 @@ class PostController extends Controller {
       'content' => $request->content,
       'user_id' => auth()->user()->id,
     ]);
-
 
   }
 
@@ -43,7 +41,11 @@ class PostController extends Controller {
    * Update the specified resource in storage.
    */
   public function update(Request $request, Post $post) {
-    
+
+    if ($post->user_id != auth()->user()->id) {
+      return response(['msg' => 'You Are NOT Authorized to do this action']);
+    }
+
     $done = $post->update($request->validate([
       'content' => ['required', 'min:2'],
     ]));
@@ -60,8 +62,13 @@ class PostController extends Controller {
    * Remove the specified resource from storage.
    */
   public function destroy(Post $post) {
+    
+    if ($post->user_id != auth()->user()->id) {
+      return response(['msg' => 'You Are NOT Authorized to do this action']);
+    }
+    
     $done = $post->delete();
-
+    
     if ($done) {
       return response(['msg' => 'Post Successfully Deleted'], 200);
     }
